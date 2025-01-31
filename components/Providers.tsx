@@ -3,6 +3,7 @@
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+import { Session } from 'next-auth';
 
 const theme = createTheme({
   palette: {
@@ -17,7 +18,7 @@ export default function Providers({
   session,
 }: {
   children: React.ReactNode;
-  session: any;
+  session: Session | null;
 }) {
   return (
     <SessionProvider session={session}>

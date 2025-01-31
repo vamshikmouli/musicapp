@@ -1,6 +1,5 @@
 import './globals.css';
 import { auth } from '@/auth';
-import NavBar from '@/components/NavBar';
 import Providers from '@/components/Providers';
 
 export const metadata = {

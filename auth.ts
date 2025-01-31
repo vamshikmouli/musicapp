@@ -6,14 +6,9 @@ import Credentials from 'next-auth/providers/credentials';
 import { saltAndHashPassword } from './utils/helper';
 import bcrypt from 'bcryptjs';
 
-export const {
-  handlers: { GET, POST },
-  signIn,
-  signOut,
-  auth,
-} = NextAuth({
+const authOptions = {
   adapter: PrismaAdapter(prisma),
-  session: { strategy: 'jwt' },
+  session: { strategy: 'jwt' as const },
   providers: [
     Credentials({
       name: 'Credentials',
@@ -55,14 +50,6 @@ export const {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.email = user.email;
-        token.role = user.role;
-      }
-      return token;
-    },
     async session({
       session,
       token,
@@ -77,16 +64,14 @@ export const {
       }
       return session;
     },
-    async redirect({ url, baseUrl }) {
-      if (url === `${baseUrl}/sign-in`) {
-        return baseUrl;
-      }
-      return url;
-    },
   },
   pages: {
     signIn: '/sign-in',
     signOut: '/',
     error: '/auth/error',
   },
-});
+};
+
+const { handlers, signIn, signOut, auth } = NextAuth(authOptions);
+
+export { handlers, signIn, signOut, auth };
