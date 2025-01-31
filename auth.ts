@@ -31,7 +31,6 @@ const authOptions = {
         let user: any = await prisma.user.findUnique({
           where: { email },
         });
-        console.log(user);
         if (!user) {
           throw new Error('No user found with this email.');
         }
@@ -67,7 +66,6 @@ const authOptions = {
   },
   pages: {
     signIn: '/sign-in',
-    signOut: '/',
     error: '/auth/error',
   },
 };

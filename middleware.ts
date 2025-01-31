@@ -2,27 +2,27 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { auth } from '@/auth';
 
-const protectedRoutes = ['/sign-in', '/sign-up'];
+const protectedRoutes = ['/home', '/'];
 
 export default async function middleware(request: NextRequest) {
   const session = await auth();
   const { pathname } = request.nextUrl;
 
-  if (!session && pathname !== '/sign-in') {
-    return NextResponse.redirect(new URL('/sign-in', request.url));
+  // Skip session checks for sign-in and sign-up pages
+  if (pathname === '/sign-in' || pathname === '/sign-up') {
+    return NextResponse.next();
   }
 
-  if (session && pathname === '/sign-in') {
+  // If user is authenticated and trying to access the sign-in or sign-up page, redirect to home
+  if (session && (pathname === '/sign-in' || pathname === '/sign-up')) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  const isProtected = protectedRoutes.some((route) =>
-    request.nextUrl.pathname.startsWith(route)
-  );
-  if (!session && isProtected) {
-    const absoluteURL = new URL('/', request.nextUrl.origin);
-    return NextResponse.redirect(absoluteURL.toString());
+  // If user is not authenticated and trying to access a protected route, redirect to sign-in
+  if (!session && protectedRoutes.some((route) => pathname.startsWith(route))) {
+    return NextResponse.redirect(new URL('/sign-in', request.url));
   }
+
   return NextResponse.next();
 }
 
