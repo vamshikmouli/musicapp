@@ -37,6 +37,7 @@ export const loginWithCreds = async (formData: FormData) => {
     redirectTo: '/',
   };
   const existingUser = await getUserByEmail(formData.get('email') as string);
+  console.log(existingUser);
 
   try {
     await signIn('credentials', rawFormData);
@@ -46,10 +47,9 @@ export const loginWithCreds = async (formData: FormData) => {
         case 'CredentialsSignin':
           return { error: 'Invalid credentials!' };
         default:
-          return { error: 'Something went wrong!' };
+          return { error: error.cause?.err?.message };
       }
     }
-
     throw error;
   }
   revalidatePath('/');

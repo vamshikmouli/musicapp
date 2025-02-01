@@ -1,19 +1,16 @@
 'use client';
 
-import { useFormStatus } from 'react-dom';
+import LNSButton from './ui/LNSButton';
 
-const AuthButton = () => {
-  const { pending } = useFormStatus();
+interface AuthButtonProps {
+  loading: boolean;
+}
+
+const AuthButton: React.FC<AuthButtonProps> = ({ loading }) => {
   return (
-    <button
-      disabled={pending}
-      type="submit"
-      className={`${
-        pending ? 'bg-gray-600' : 'bg-purple-600'
-      } rounded-md w-full px-12 py-3 text-sm font-medium text-white`}
-    >
-      {pending ? 'Loading...' : 'Sign in'}
-    </button>
+    <LNSButton type="submit" loading={loading}>
+      Sign in
+    </LNSButton>
   );
 };
 

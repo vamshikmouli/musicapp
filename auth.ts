@@ -32,17 +32,17 @@ const authOptions = {
           where: { email },
         });
         if (!user) {
-          throw new Error('No user found with this email.');
+          throw new Error('No user found with this email');
         }
         if (!user.hashPassword) {
-          throw new Error('User has no hashed password.');
+          throw new Error('User has no hashed password');
         }
         const isMatch = bcrypt.compareSync(
           credentials.password as string,
           user.hashPassword
         );
         if (!isMatch) {
-          throw new Error('Incorrect password.');
+          throw new Error('Incorrect password');
         }
         return user;
       },

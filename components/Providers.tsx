@@ -4,14 +4,7 @@ import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { Session } from 'next-auth';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#832296',
-    },
-  },
-});
+import theme from '@/theme';
 
 export default function Providers({
   children,
