@@ -36,13 +36,11 @@ const LoginForm = () => {
     const formData = new FormData();
     formData.append('email', data.email);
     formData.append('password', data.password);
-    setTimeout(async () => {
-      const response = await loginWithCreds(formData);
-      if (response?.error) {
-        setServerError(response.error);
-      }
-      setLoading(false);
-    }, 2000);
+    const response = await loginWithCreds(formData);
+    if (response?.error) {
+      setServerError(response.error);
+    }
+    setLoading(false);
   };
 
   return (
