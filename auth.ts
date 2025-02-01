@@ -68,6 +68,7 @@ const authOptions = {
     signIn: '/sign-in',
     error: '/auth/error',
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const { handlers, signIn, signOut, auth } = NextAuth(authOptions);
