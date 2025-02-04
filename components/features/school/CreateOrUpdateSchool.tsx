@@ -6,8 +6,8 @@ import * as z from 'zod';
 import LNSDialog from '@/components/ui/LNSDialog';
 import LNSTextField from '@/components/ui/LNSTextField';
 import theme from '@/theme';
-import { createOrUpdateSchool } from '@/actions/school/route';
 import { ISchool } from '@/actions/enities/school';
+import { saveSchool } from '@/actions/schoolService';
 
 const schoolSchema = z.object({
   name: z.string().min(1, 'School name is required'),
@@ -37,10 +37,13 @@ const CreateOrUpdateSchool = ({ open, onClose, school }: CreateSchoolProps) => {
 
   const onSubmit = async (data: ISchool) => {
     const schoolData = school ? { ...data, id: school.id } : data;
-    const res = await createOrUpdateSchool(schoolData);
-    if (!res) return;
-    reset();
-    onClose();
+    try {
+      await saveSchool(schoolData);
+      reset();
+      onClose();
+    } catch (error) {
+      console.error('Error saving school:', error);
+    }
   };
 
   return (

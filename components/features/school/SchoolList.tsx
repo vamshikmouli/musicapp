@@ -8,14 +8,14 @@ import LNSButton from '@/components/ui/LNSButton';
 import { ISchool } from '@/actions/enities/school';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import CreateOrUpdateSchool from './CreateOrUpdateSchool';
+import LNSDataGrid from '@/components/ui/LNSDataGrid';
+import Header from '@/components/ui/Header';
 import {
   deleteSchool,
   getAllSchools,
   getSchoolById,
-} from '@/actions/school/route';
-import CreateOrUpdateSchool from './CreateOrUpdateSchool';
-import LNSDataGrid from '@/components/ui/LNSDataGrid';
-import Header from '@/components/ui/Header';
+} from '@/actions/schoolService';
 
 const SchoolList = () => {
   const [schools, setSchools] = useState<ISchool[]>([]);
@@ -24,7 +24,8 @@ const SchoolList = () => {
 
   useEffect(() => {
     const fetchSchools = async () => {
-      setSchools(await getAllSchools());
+      const response = await getAllSchools();
+      setSchools(response);
     };
     fetchSchools();
   }, []);
@@ -66,9 +67,9 @@ const SchoolList = () => {
   ];
 
   const handleUpdate = async (id: string) => {
-    const school = await getSchoolById(id);
-    if (!school) return;
-    setSchool(school);
+    const response = await getSchoolById(id);
+    if (!response) return;
+    setSchool(response);
     setOpen(true);
   };
 
