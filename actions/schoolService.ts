@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { ISchool } from './enities/school';
 
-const APP_URL = 'http://localhost:3000';
+const APP_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
 const SCHOOLS_API_URL = `${APP_URL}/api/schools`;
 
 export const saveSchool = async (data: ISchool) => {
