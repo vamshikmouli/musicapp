@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "noUnusedLocals": true, // Errors on unused local variables
+    "noUnusedParameters": true, // Errors on unused function parameters
+    "noImplicitReturns": true, // Errors if a function doesn't return something
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

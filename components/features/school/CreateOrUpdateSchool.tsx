@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import LNSDialog from '@/components/ui/LNSDialog';
 import LNSTextField from '@/components/ui/LNSTextField';
-import theme from '@/theme';
 import { ISchool } from '@/actions/enities/school';
 import { saveSchool } from '@/actions/schoolService';
 

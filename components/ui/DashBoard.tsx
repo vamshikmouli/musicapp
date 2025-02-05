@@ -1,101 +1,92 @@
 'use client';
-import {
-  Box,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-  Paper,
-} from '@mui/material';
+
+import { Container, Paper, Typography, Button, Box } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useState } from 'react';
 
-const DashBoard = () => {
-  const [clicked, setClicked] = useState(false);
+const funnyQuotes = [
+  'Code is like humor. When you have to explain it, it’s bad. 😆',
+  'Why do programmers prefer dark mode? Because light attracts bugs! 🐛',
+  "I'm not lazy. I'm on energy-saving mode. 🔋",
+  'Real programmers count from 0, not 1. 😎',
+  'If debugging is the process of removing bugs, then programming must be the process of putting them in. 🤯',
+];
 
-  const handleButtonClick = () => {
-    setClicked(!clicked);
+const Dashboard = () => {
+  const [quoteIndex, setQuoteIndex] = useState(0);
+
+  const handleNewQuote = () => {
+    setQuoteIndex((prev) => (prev + 1) % funnyQuotes.length);
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-        backgroundColor: '#f4f4f9',
-        padding: 3,
-      }}
-    >
-      <Typography
-        variant="h2"
-        color="primary"
-        sx={{ fontWeight: 'bold', fontSize: '3rem' }}
-      >
-        😎 Welcome to Your Dashboard! 🚀
-      </Typography>
-      <Typography variant="h6" sx={{ mt: 2 }}>
-        Where everything is important, but nothing is urgent. 😆
-      </Typography>
-
-      {/* Button */}
-      <Button
-        variant="contained"
-        color={clicked ? 'secondary' : 'primary'}
-        sx={{ mt: 3, padding: '1rem 2rem', fontSize: '1.2rem' }}
-        onClick={handleButtonClick}
-      >
-        {clicked ? 'Chill, It’s All Good! 🍹' : 'Let’s Get This Done! 💼'}
-      </Button>
-
-      {/* Dashboard Cards */}
-      <Grid container spacing={3} sx={{ mt: 5, maxWidth: '90%' }}>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card sx={{ backgroundColor: '#f0f8ff' }}>
-            <CardContent>
-              <Typography variant="h5">Tasks Left 📝</Typography>
-              <Typography variant="h6">42</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card sx={{ backgroundColor: '#fff0f5' }}>
-            <CardContent>
-              <Typography variant="h5">Coffee Cups ☕️</Typography>
-              <Typography variant="h6">3</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card sx={{ backgroundColor: '#f8f8f0' }}>
-            <CardContent>
-              <Typography variant="h5">Emails Unread 📧</Typography>
-              <Typography variant="h6">99+</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-
-      {/* Fun Paper Element */}
+    <Container sx={{ mt: 4 }}>
+      {/* Funny Header */}
       <Paper
         sx={{
-          mt: 5,
-          padding: 3,
-          backgroundColor: '#e0f7fa',
+          p: 3,
+          mb: 4,
           textAlign: 'center',
+          backgroundColor: '#ffe4b5',
+          boxShadow: 3,
+          borderRadius: 3,
         }}
       >
-        <Typography variant="h5" sx={{ fontSize: '1.5rem' }}>
-          Remember, don’t work hard, work smart! 😏💡
+        <Typography variant="h4" fontWeight="bold">
+          🚀 Welcome to Your Music Dashboard!
         </Typography>
-        <Typography variant="body1" sx={{ mt: 2, fontStyle: 'italic' }}>
-          We believe in you, even if you don’t. 😂
+        <Typography variant="body1" mt={1}>
+          Work hard, but don’t forget to laugh! 😂
         </Typography>
       </Paper>
-    </Box>
+
+      <Grid container spacing={3}>
+        {/* Left Panel - Funny Quote */}
+        <Grid size={12}>
+          <Paper sx={{ p: 3, minHeight: 150, boxShadow: 5, borderRadius: 2 }}>
+            <Typography variant="h5" fontWeight="bold">
+              🤩 Today’s Dev Wisdom:
+            </Typography>
+            <Typography variant="body1" mt={2}>
+              {funnyQuotes[quoteIndex]}
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ mt: 2 }}
+              onClick={handleNewQuote}
+            >
+              Get Another Quote
+            </Button>
+          </Paper>
+        </Grid>
+
+        {/* Right Panel - Fun Section */}
+        <Grid size={12}>
+          <Paper
+            sx={{ p: 2, textAlign: 'center', boxShadow: 5, borderRadius: 2 }}
+          >
+            <Typography variant="h6">
+              🤣 Don’t Take Life Too Seriously
+            </Typography>
+            <Box
+              sx={{
+                mt: 2,
+                p: 2,
+                backgroundColor: '#ffeb3b',
+                borderRadius: 2,
+                fontSize: '1.2rem',
+                fontWeight: 'bold',
+                boxShadow: 3,
+              }}
+            >
+              “Keep calm and write code! 💻”
+            </Box>
+          </Paper>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
-export default DashBoard;
+export default Dashboard;

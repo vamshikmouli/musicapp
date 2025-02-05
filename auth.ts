@@ -1,9 +1,8 @@
-import { Prisma, User } from '@prisma/client';
 import NextAuth from 'next-auth';
 import { prisma } from './lib/prisma';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import Credentials from 'next-auth/providers/credentials';
-import { saltAndHashPassword } from './utils/helper';
+//import { saltAndHashPassword } from './utils/helper';
 import bcrypt from 'bcryptjs';
 
 const authOptions = {
@@ -26,7 +25,7 @@ const authOptions = {
         }
 
         const email = credentials.email as string;
-        const hash = saltAndHashPassword(credentials.password);
+        //const hash = saltAndHashPassword(credentials.password);
 
         let user: any = await prisma.user.findUnique({
           where: { email },

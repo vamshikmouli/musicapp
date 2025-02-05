@@ -10,7 +10,6 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import Image from 'next/image';
-import { Grid } from 'lucide-react';
 
 const loginSchema = z.object({
   email: z.string().min(1, 'Email is required').email('Invalid email format'),

@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid2';
-import { CircularProgress, Box, Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
-import { Music, Disc, Guitar } from 'lucide-react';
+import { Music } from 'lucide-react';
 
 const MusicLoader = () => {
   const [funnyText, setFunnyText] = useState('Tuning the Guitar...');

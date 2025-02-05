@@ -1,7 +1,7 @@
 'use client';
 
 import { GridColDef } from '@mui/x-data-grid';
-import { IconButton, Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useEffect, useState } from 'react';
 import LNSButton from '@/components/ui/LNSButton';

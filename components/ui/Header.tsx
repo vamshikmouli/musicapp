@@ -1,5 +1,5 @@
 'use client';
-import { Typography, Paper, Box } from '@mui/material';
+import { Typography, Paper } from '@mui/material';
 
 interface HeaderProps {
   title: string;
