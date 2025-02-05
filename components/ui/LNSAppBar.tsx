@@ -28,7 +28,7 @@ const LNSAppBar = () => {
   return (
     <AppBar position="sticky" sx={{ height: 50 }}>
       <Toolbar sx={{ height: '100%', minHeight: 'auto' }}>
-        <Typography variant="h6" sx={{ flexGrow: 1, fontSize: '1rem' }}>
+        <Typography variant="h2" sx={{ flexGrow: 1, fontSize: '2rem' }}>
           LNS Music Class
         </Typography>
         <IconButton color="inherit">

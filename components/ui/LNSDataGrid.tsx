@@ -1,3 +1,4 @@
+'use client';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import theme from '@/theme';
 
@@ -45,17 +46,13 @@ const LNSDataGrid = <T extends object>({
           borderBottom: '1px solid #f0f0f0',
         },
         '& .MuiDataGrid-footerContainer': {
-          backgroundColor: theme.palette.primary.main,
           color: 'white',
         },
-        '& .MuiCheckbox-root': {
-          color: theme.palette.primary.main,
-        },
         '& .MuiPagination-root': {
-          color: 'white', // Ensure pagination controls are white
+          color: 'white',
         },
         '& .MuiDataGrid-pager': {
-          color: 'white', // Make pager text white
+          color: 'white',
         },
       }}
     />

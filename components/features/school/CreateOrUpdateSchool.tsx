@@ -55,33 +55,15 @@ const CreateOrUpdateSchool = ({ open, onClose, school }: CreateSchoolProps) => {
     >
       <LNSTextField
         label="School Name"
-        type="name"
         placeholder="Enter your School name"
-        fullWidth
-        variant="outlined"
-        margin="normal"
-        sx={{
-          backgroundColor: theme.palette.primary.contrastText,
-          borderRadius: 1,
-        }}
         {...register('name')}
         error={!!errors.name}
         helperText={errors.name?.message?.toString()}
       />
       <LNSTextField
         label="Location"
-        type="location"
         placeholder="Enter your School location"
-        fullWidth
-        variant="outlined"
-        margin="normal"
-        sx={{
-          backgroundColor: theme.palette.primary.contrastText,
-          borderRadius: 1,
-        }}
         {...register('location')}
-        error={!!errors.location}
-        helperText={errors.location?.message?.toString()}
       />
     </LNSDialog>
   );

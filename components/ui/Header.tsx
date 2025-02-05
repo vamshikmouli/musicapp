@@ -1,33 +1,47 @@
 'use client';
-import { Typography, Box } from '@mui/material';
+import { Typography, Paper, Box } from '@mui/material';
 
 interface HeaderProps {
   title: string;
+  totalCount: number;
 }
 
-const Header = ({ title }: HeaderProps) => {
+const Header = ({ title, totalCount }: HeaderProps) => {
   return (
-    <Box
+    <Paper
       sx={{
         backgroundColor: '#f5f5f5',
-        padding: 0.5,
-        borderRadius: 1,
+        p: 2,
+        borderRadius: 2,
         boxShadow: 2,
-        marginBottom: 0.5,
         width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between', // Align title left, count right
+        alignItems: 'center',
       }}
     >
+      {/* Title */}
       <Typography
-        variant="h4"
+        variant="h5"
         sx={{
           fontWeight: 'bold',
-          textAlign: 'center',
           color: 'primary.main',
         }}
       >
         {title}
       </Typography>
-    </Box>
+
+      {/* Total Count */}
+      <Typography
+        variant="h5"
+        sx={{
+          fontWeight: 'bold',
+          color: 'primary.main',
+        }}
+      >
+        {totalCount}
+      </Typography>
+    </Paper>
   );
 };
 

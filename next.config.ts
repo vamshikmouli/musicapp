@@ -2,7 +2,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [], // Add domains here if using external images
+    domains: ['drive.google.com'],
   },
   webpack(config) {
     config.module.rules.push({

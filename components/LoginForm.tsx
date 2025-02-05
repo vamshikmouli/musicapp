@@ -9,6 +9,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
+import Image from 'next/image';
+import { Grid } from 'lucide-react';
 
 const loginSchema = z.object({
   email: z.string().min(1, 'Email is required').email('Invalid email format'),
@@ -57,7 +59,7 @@ const LoginForm = () => {
         <Card
           sx={{
             width: '100%',
-            maxWidth: 400,
+            maxWidth: 350,
             padding: 4,
             boxShadow: 6,
             borderRadius: 2,
@@ -69,6 +71,14 @@ const LoginForm = () => {
             },
           }}
         >
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Image
+              src="https://drive.google.com/uc?export=view&id=1dVJHxWfV3yyHnAxujYmzhPPQ4qhq8zSX"
+              alt="LNS Logo"
+              width={100}
+              height={100}
+            />
+          </Box>
           <CardContent>
             <Typography
               variant="h5"

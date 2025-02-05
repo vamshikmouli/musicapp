@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { unauthorizedResponse, validateRequest } from '@/utils/apiHelper';
 
 export async function GET(
   req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
+  if (!validateRequest(req)) return unauthorizedResponse();
   try {
     const { id } = await context.params;
     if (!id) {

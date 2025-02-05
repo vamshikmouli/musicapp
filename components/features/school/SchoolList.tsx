@@ -1,7 +1,7 @@
 'use client';
 
 import { GridColDef } from '@mui/x-data-grid';
-import { IconButton } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useEffect, useState } from 'react';
 import LNSButton from '@/components/ui/LNSButton';
@@ -16,19 +16,24 @@ import {
   getAllSchools,
   getSchoolById,
 } from '@/actions/schoolService';
+import MusicLoader from '@/components/ui/MusicLoader';
+import EmptyCard from '@/components/ui/EmptyCard';
 
 const SchoolList = () => {
   const [schools, setSchools] = useState<ISchool[]>([]);
   const [open, setOpen] = useState(false);
   const [school, setSchool] = useState<ISchool | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchSchools = async () => {
+      setLoading(true);
       const response = await getAllSchools();
       setSchools(response);
+      setLoading(false);
     };
     fetchSchools();
-  }, []);
+  }, [open]);
 
   const columns: GridColDef[] = [
     { field: 'id', flex: 0, hideable: true },
@@ -87,7 +92,7 @@ const SchoolList = () => {
 
   return (
     <Grid container spacing={2} sx={{ height: 400, width: '100%', p: 3 }}>
-      <Header title="School List" />
+      <Header title="Schools" totalCount={schools.length} />
       <Grid container size={12} justifyContent="flex-end">
         <LNSButton
           variant="contained"
@@ -100,9 +105,19 @@ const SchoolList = () => {
           Add School
         </LNSButton>
       </Grid>
-      <Grid sx={{ width: '100%' }}>
-        <LNSDataGrid rows={schools} columns={columns} />
-      </Grid>
+      {!loading && schools.length === 0 ? (
+        <EmptyCard
+          title={'No Schools Found'}
+          message={'No schools found... Time for a musical break! 🎸'}
+        />
+      ) : schools.length > 0 ? (
+        <Grid sx={{ width: '100%' }}>
+          <LNSDataGrid rows={schools} columns={columns} />
+        </Grid>
+      ) : (
+        <MusicLoader />
+      )}
+
       {open && (
         <CreateOrUpdateSchool
           open={open}

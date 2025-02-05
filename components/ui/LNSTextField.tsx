@@ -1,21 +1,21 @@
-import theme from '@/theme';
-import { TextField as MuiTextField, TextFieldProps } from '@mui/material';
+import { TextField, TextFieldProps } from '@mui/material';
 
-const LNSTextField: React.FC<TextFieldProps> = (props) => {
+const LNSTextField: React.FC<TextFieldProps> = ({ sx, ...props }) => {
   return (
-    <MuiTextField
-      {...props}
+    <TextField
       fullWidth
       variant="outlined"
       margin="normal"
+      {...props}
       sx={{
-        backgroundColor: theme.palette.primary.contrastText,
+        backgroundColor: 'primary.contrastText',
         borderRadius: 1,
         '& .MuiOutlinedInput-root': {
           '& fieldset': { borderColor: 'primary.main' },
           '&:hover fieldset': { borderColor: 'primary.dark' },
           '&.Mui-focused fieldset': { borderColor: 'primary.main' },
         },
+        ...sx, // Allow external styles to be merged
       }}
     />
   );

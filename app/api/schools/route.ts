@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { unauthorizedResponse, validateRequest } from '@/utils/apiHelper';
 
 /**
  * GET: Fetch all schools or a single school by ID.
  */
-export async function GET() {
+export async function GET(req: NextRequest) {
+  if (!validateRequest(req)) return unauthorizedResponse();
   try {
     const schools = await prisma.school.findMany();
     return NextResponse.json(schools);
   } catch (error) {
-    console.error('POST Error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch schools' },
       { status: 500 }
@@ -21,6 +22,7 @@ export async function GET() {
  * POST: Create or update a school.
  */
 export async function POST(req: NextRequest) {
+  if (!validateRequest(req)) return unauthorizedResponse();
   try {
     const data = await req.json();
 
@@ -47,6 +49,7 @@ export async function POST(req: NextRequest) {
  * DELETE: Remove a school by ID.
  */
 export async function DELETE(req: NextRequest) {
+  if (!validateRequest(req)) return unauthorizedResponse();
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');

@@ -16,7 +16,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       <Providers session={session}>
         <body className="font-sans">
           {session && <LNSAppBar />}
-          <div className="mx-auto max-w-screen-lg h-screen flex flex-col">
+          <div className="mx-auto max-w-screen-lg h-screen">
             <div className="flex-grow">{children}</div>
           </div>
           {session && <BottomNav />}
