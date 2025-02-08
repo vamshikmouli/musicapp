@@ -5,7 +5,6 @@ import { IconButton } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useEffect, useState } from 'react';
 import LNSButton from '@/components/ui/LNSButton';
-import { ISchool } from '@/actions/enities/school';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CreateOrUpdateSchool from './CreateOrUpdateSchool';
@@ -18,11 +17,12 @@ import {
 } from '@/actions/schoolService';
 import MusicLoader from '@/components/ui/MusicLoader';
 import EmptyCard from '@/components/ui/EmptyCard';
+import { School } from '@prisma/client';
 
 const SchoolList = () => {
-  const [schools, setSchools] = useState<ISchool[]>([]);
+  const [schools, setSchools] = useState<School[]>([]);
   const [open, setOpen] = useState(false);
-  const [school, setSchool] = useState<ISchool | null>(null);
+  const [school, setSchool] = useState<School | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -37,13 +37,16 @@ const SchoolList = () => {
 
   const columns: GridColDef[] = [
     { field: 'id', flex: 0, hideable: true },
-    { field: 'name', headerName: 'School Name', width: 250 },
-    { field: 'location', headerName: 'City/Area', width: 200 },
-    { field: 'students', headerName: 'Students', width: 150 },
+    { field: 'name', headerName: 'School Name', width: 150 },
+    { field: 'email', headerName: 'Email', width: 150 },
+    { field: 'contactPerson', headerName: 'Contact Person', width: 150 },
+    { field: 'contactNumber', headerName: 'Contact Number', width: 150 },
+    { field: 'location', headerName: 'City/Area', width: 150 },
+    { field: 'students', headerName: 'Students', width: 100 },
     {
       field: 'actions',
       headerName: 'Actions',
-      width: 200,
+      width: 100,
       hideSortIcons: true,
       disableColumnMenu: true,
       renderCell: (params) => (

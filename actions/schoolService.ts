@@ -1,12 +1,12 @@
 'use server';
 
-import { ISchool } from './enities/school';
+import { School } from '@prisma/client';
 import axiosInstance from '@/lib/axios';
 
 const APP_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
 const SCHOOLS_API_URL = `${APP_URL}/api/schools`;
 
-export const saveSchool = async (data: ISchool) => {
+export const saveSchool = async (data: Partial<School>) => {
   try {
     const res = await axiosInstance.post(SCHOOLS_API_URL, data);
     return res.data;
