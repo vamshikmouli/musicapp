@@ -8,6 +8,7 @@ import LNSTextField from '@/components/ui/LNSTextField';
 import { saveSchool } from '@/actions/schoolService';
 import Grid from '@mui/material/Grid2';
 import { School } from '@prisma/client';
+import { useNotification } from '@/context/NotificationContext';
 
 const schoolSchema = z.object({
   id: z.string().optional(), // Include id for updates
@@ -36,6 +37,7 @@ const CreateOrUpdateSchool = ({ open, onClose, school }: CreateSchoolProps) => {
       ...school,
     },
   });
+  const { showNotification } = useNotification();
 
   const onSubmit = async (data: School) => {
     const schoolData = school ? { ...data, id: school.id } : data;
@@ -43,8 +45,12 @@ const CreateOrUpdateSchool = ({ open, onClose, school }: CreateSchoolProps) => {
       await saveSchool(schoolData);
       reset();
       onClose();
+      showNotification(
+        `School ${data?.id ? 'updated' : 'added'} successfully`,
+        'success'
+      );
     } catch (error) {
-      console.error('Error saving school:', error);
+      showNotification('Error saving school', 'error');
     }
   };
 
@@ -58,6 +64,7 @@ const CreateOrUpdateSchool = ({ open, onClose, school }: CreateSchoolProps) => {
       <Grid container spacing={2}>
         <Grid size={6}>
           <LNSTextField
+            required
             label="School Name"
             placeholder="Enter your School name"
             {...register('name')}
@@ -67,6 +74,7 @@ const CreateOrUpdateSchool = ({ open, onClose, school }: CreateSchoolProps) => {
         </Grid>
         <Grid size={6}>
           <LNSTextField
+            required
             label="Email"
             placeholder="Enter your School email"
             {...register('email')}

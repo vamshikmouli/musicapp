@@ -119,8 +119,8 @@ model Staff {
   email     String    @unique
   staffId   String    @unique
   joiningDate DateTime @default(now())
-  schoolId  String
-  school    School    @relation(fields: [schoolId], references: [id])
+  schoolId  String?
+  school    School?    @relation(fields: [schoolId], references: [id])
   students  Student[] @relation("StaffStudents")
   attendance  Attendance[]
   userId      String   @unique
@@ -133,7 +133,7 @@ model Student {
   name      String
   DOB       DateTime
   standard  String? 
-  schoolId  String
+  schoolId  String?
   school    School?   @relation(fields: [schoolId], references: [id])
   staff     Staff?    @relation("StaffStudents", fields: [staffId], references: [id])
   staffId   String?

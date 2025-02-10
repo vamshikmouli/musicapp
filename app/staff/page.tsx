@@ -1,9 +1,9 @@
 'use client';
 
-import ComingSoon from '@/components/ui/ComingSoon';
+import StaffList from '@/components/features/staff/StaffList';
 
 const Staff = () => {
-  return <ComingSoon />;
+  return <StaffList />;
 };
 
 export default Staff;
