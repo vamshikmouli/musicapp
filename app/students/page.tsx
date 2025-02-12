@@ -1,7 +1,8 @@
+import StudentList from '@/components/features/student/StudentList';
 import React from 'react';
 
 const Student = () => {
-  return <div>Student</div>;
+  return <StudentList />;
 };
 
 export default Student;
