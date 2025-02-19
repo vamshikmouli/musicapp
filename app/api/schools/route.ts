@@ -86,7 +86,7 @@ async function createNewSchool(data: any) {
   return NextResponse.json(school, { status: 201 });
 }
 
-export async function getOrCreateUser(
+async function getOrCreateUser(
   email: string,
   contactPerson?: string,
   role?: UserRole

@@ -1,7 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { unauthorizedResponse, validateRequest } from '@/utils/apiHelper';
+import { saltAndHashPassword } from '@/utils/helper';
+import { UserRole } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
-import { getOrCreateUser } from '../schools/route';
 
 /**
  * GET: Fetch student by school and batch
@@ -115,6 +116,25 @@ async function createNewStudent(data: any) {
     },
   });
   return NextResponse.json(student, { status: 201 });
+}
+
+async function getOrCreateUser(
+  email: string,
+  contactPerson?: string,
+  role?: UserRole
+) {
+  const existingUser = await prisma.user.findUnique({ where: { email } });
+  if (existingUser) return existingUser.id;
+
+  const newUser = await prisma.user.create({
+    data: {
+      name: contactPerson || 'Default User',
+      email,
+      role: role ?? 'PARENT',
+      hashPassword: saltAndHashPassword('qwerty'),
+    },
+  });
+  return newUser.id;
 }
 
 function errorResponse(message: string, status: number) {
