@@ -1,13 +1,13 @@
 'use client';
 
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
-import { useEffect, useState } from 'react';
 import SchoolIcon from '@mui/icons-material/School';
 import HomeIcon from '@mui/icons-material/Home';
 import MoneyIcon from '@mui/icons-material/Money';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import { usePathname, useRouter } from 'next/navigation';
 import PersonIcon from '@mui/icons-material/Person';
+import { useEffect, useState } from 'react';
 
 const BottomNavBar = () => {
   const router = useRouter();
@@ -23,7 +23,14 @@ const BottomNavBar = () => {
   };
 
   useEffect(() => {
-    setValue(pathToIndex[pathname] ?? 0);
+    const matchedPath = Object.keys(pathToIndex).find((path) =>
+      pathname.startsWith(path)
+    );
+    if (matchedPath !== undefined) {
+      setValue(pathToIndex[matchedPath]);
+    } else {
+      setValue(0);
+    }
   }, [pathname]);
 
   return (

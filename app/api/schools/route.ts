@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { unauthorizedResponse, validateRequest } from '@/utils/apiHelper';
 import { saltAndHashPassword } from '@/utils/helper';
+import { UserRole } from '@prisma/client';
 
 /**
  * GET: Fetch all schools or a single school by ID.
@@ -80,12 +81,16 @@ async function updateSchool(existingSchool: any, data: any) {
 }
 
 async function createNewSchool(data: any) {
-  let userId = await getOrCreateUser(data.email, data.contactPerson);
+  let userId = await getOrCreateUser(data.email, data.contactPerson, 'SCHOOL');
   const school = await prisma.school.create({ data: { ...data, userId } });
   return NextResponse.json(school, { status: 201 });
 }
 
-async function getOrCreateUser(email: string, contactPerson?: string) {
+export async function getOrCreateUser(
+  email: string,
+  contactPerson?: string,
+  role?: UserRole
+) {
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) return existingUser.id;
 
@@ -93,7 +98,7 @@ async function getOrCreateUser(email: string, contactPerson?: string) {
     data: {
       name: contactPerson || 'Default User',
       email,
-      role: 'SCHOOL',
+      role: role ?? 'PARENT',
       hashPassword: saltAndHashPassword('qwerty'),
     },
   });

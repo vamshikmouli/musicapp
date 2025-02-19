@@ -55,7 +55,7 @@ const SchoolList = () => {
 
         return (
           <Grid
-            onClick={() => router.push('/students')}
+            onClick={() => router.push(`/schools/students/${params.row.id}`)}
             style={{
               cursor: 'pointer',
               color: 'blue',
